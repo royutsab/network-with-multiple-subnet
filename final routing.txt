@@ -1,0 +1,383 @@
+set gateway:
+
+router 1
+
+interface fa0/0
+ip address 10.2.0.1 255.255.0.0
+no shut
+do wr
+
+interface fa1/0
+ip address 10.4.0.1 255.255.0.0
+no shut
+do wr
+
+router 2
+
+interface fa0/0
+ip address 10.1.0.1 255.255.0.0
+no shut
+do wr
+
+interface fa1/0
+ip address 10.3.0.1 255.255.0.0
+no shut
+do wr
+
+router 3
+
+interface fa0/0
+ip address 192.168.1.129 255.255.255.240
+no shut
+do wr
+
+router 4
+
+interface fa0/0
+ip address 192.168.1.113 255.255.255.240
+no shut
+do wr
+
+router 5
+
+interface fa0/0
+ip address 192.168.1.161 255.255.255.240
+no shut
+do wr
+
+router 6
+
+interface fa0/0
+ip address 172.16.3.1 255.255.255.0
+no shut
+do wr
+
+router 7
+
+interface fa0/0
+ip address 172.16.2.1 255.255.255.0
+no shut
+do wr
+
+router 8
+
+interface fa0/0
+ip address 172.16.1.1 255.255.255.0
+no shut
+do wr
+
+Getaway settled
+-------------------------------------------------------------------------------------------------
+
+serial connection
+-----------------
+
+
+router 1
+
+interface se2/0
+ip address 10.5.0.2 255.255.0.0
+no shut
+do wr
+exit
+
+interface se3/0
+clock rate 64000
+ip address 192.168.1.18 255.255.255.240
+no shut
+do wr
+exit
+
+router 2
+
+interface se2/0
+ip address 10.5.0.3 255.255.0.0
+clock rate 64000
+no shut
+do wr
+exit
+
+interface se3/0
+clock rate 64000
+ip address 192.168.1.34 255.255.255.240
+no shut
+do wr
+exit
+
+router 3
+
+interface se3/0
+ip address 192.168.1.83 255.255.255.240
+no shut
+do wr
+exit
+
+interface se2/0
+clock rate 64000
+ip address 192.168.1.146 255.255.255.240
+no shut
+do wr
+exit
+
+router 4
+
+interface se3/0
+ip address 192.168.1.99 255.255.255.240
+no shut
+do wr
+exit
+
+interface se2/0
+ip address 192.168.1.147 255.255.255.240
+no shut
+do wr
+exit
+
+router 5
+
+interface se2/0
+ip address 192.168.1.67 255.255.255.240
+no shut
+do wr
+exit
+
+interface se6/0
+clock rate 64000
+ip address 192.168.1.82 255.255.255.240
+no shut
+do wr
+exit
+
+interface se3/0
+clock rate 64000
+ip address 192.168.1.98 255.255.255.240
+no shut
+do wr
+exit
+
+router 6
+
+interface se3/0
+ip address 172.16.4.2 255.255.255.0
+no shut
+do wr
+exit
+
+interface se2/0
+ip address 192.168.1.51 255.255.255.240
+no shut
+do wr
+exit
+
+router 7
+
+interface se3/0
+ip address 172.16.4.3 255.255.255.0
+clock rate 64000
+no shut
+do wr
+exit
+
+interface se2/0
+ip address 192.168.1.3 255.255.255.240
+no shut
+do wr
+exit
+
+router 8
+
+interface se6/0
+clock rate 64000
+ip address 192.168.1.2 255.255.255.240
+no shut
+do wr
+exit
+
+interface se3/0
+ip address 192.168.1.19 255.255.255.240
+no shut
+do wr
+exit
+
+interface se2/0
+ip address 192.168.1.35 255.255.255.240
+no shut
+do wr
+exit
+
+interface se7/0
+clock rate 64000
+ip address 192.168.1.50 255.255.255.240
+no shut
+do wr
+exit
+
+interface se8/0
+clock rate 64000
+ip address 192.168.1.66 255.255.255.240
+no shut
+do wr
+exit
+
+serial connection established
+--------------------------------------------------------------------------------------------
+
+dynamic routing algorithm
+--------------------------
+router ospf 1
+network 10.2.0.0 0.0.255.255 area 1
+network 10.4.0.0 0.0.255.255 area 1
+network 10.5.0.0 0.0.255.255 area 1
+network 192.168.1.16 0.0.0.15 area 1
+
+router ospf 2
+network 10.5.0.0 0.0.255.255 area 1
+network 10.1.0.0 0.0.255.255 area 1
+network 10.3.0.0 0.0.255.255 area 1
+network 192.168.1.32 0.0.0.15 area 1
+
+router ospf 3
+network 192.168.1.128 0.0.0.15 area 1
+network 192.168.1.80 0.0.0.15 area 1
+network 192.168.1.144 0.0.0.15 area 1
+
+router ospf 4
+network 192.168.1.112 0.0.0.15 area 1
+network 192.168.1.96 0.0.0.15 area 1
+network 192.168.1.144 0.0.0.15 area 1
+
+router ospf 5
+network 192.168.1.160 0.0.0.15 area 1
+network 192.168.1.64 0.0.0.15 area 1
+network 192.168.1.80 0.0.0.15 area 1
+network 192.168.1.96 0.0.0.15 area 1
+
+router ospf 6
+network 172.16.3.0 0.0.0.255 area 1
+network 172.16.4.0 0.0.0.255 area 1
+network 192.168.1.48 0.0.0.15 area 1
+
+router ospf 7
+network 172.16.2.0 0.0.0.255 area 1
+network 172.16.4.0 0.0.0.255 area 1
+network 192.168.1.0 0.0.0.15 area 1
+
+router ospf 8
+network 172.16.1.0 0.0.0.255 area 1
+network 192.168.1.16 0.0.0.15 area 1
+network 192.168.1.32 0.0.0.15 area 1
+network 192.168.1.0 0.0.0.15 area 1
+network 192.168.1.48 0.0.0.15 area 1
+network 192.168.1.64 0.0.0.15 area 1
+
+routing done
+------------------------------------------------------------------------------------------------------------------
+
+server pool
+------------------
+
+router 1
+
+ip dhcp pool switch2
+network 10.2.0.0 255.255.0.0
+default-router 10.2.0.1
+dns 10.1.0.100
+exit
+
+ip dhcp pool switch1
+network 10.4.0.0 255.255.0.0
+default-router 10.4.0.1
+dns 10.1.0.100
+exit
+
+router 2
+
+(ip dhcp pool switch3
+network 10.1.0.0 255.255.0.0
+default-router 10.1.0.1
+dns 10.1.0.100
+exit) server own network
+
+ip dhcp pool switch4
+network 10.3.0.0 255.255.0.0
+default-router 10.3.0.1
+dns 10.1.0.100
+exit
+
+router 3
+
+ip dhcp pool switch9
+network 192.168.1.128 255.255.255.240
+default-router 192.168.1.129
+dns 10.1.0.100
+exit
+
+router 4
+
+ip dhcp pool switch8
+network 192.168.1.112 255.255.255.240
+default-router 192.168.1.113
+dns 10.1.0.100
+exit
+
+router 5
+
+ip dhcp pool switch10
+network 192.168.1.160 255.255.255.240
+default-router 192.168.1.161
+dns 10.1.0.100
+exit
+
+router 6
+
+ip dhcp pool switch7
+network 172.16.3.0 255.255.255.0
+default-router 172.16.3.1
+dns 10.1.0.100
+exit
+
+router 7
+
+ip dhcp pool switch6
+network 172.16.2.0 255.255.255.0
+default-router 172.16.2.1
+dns 10.1.0.100
+exit
+
+router 8
+
+ip dhcp pool switch5
+network 172.16.1.0 255.255.255.0
+default-router 172.16.1.1
+dns 10.1.0.100
+exit
+
+
+network configs: 
+
+class A(5 network): 
+        NetworkSubnet	 	IDSubnet 	Mask			Gateway IP  	Usable IP Range
+        Net 1			10.1.0.0	255.255.0.0		10.1.0.1	10.1.0.2 – 10.1.255.254
+	Net 2			10.2.0.0	255.255.0.0		10.2.0.1	10.2.0.2 – 10.2.255.254
+	Net 3			10.3.0.0	255.255.0.0		10.3.0.1	10.3.0.2 – 10.3.255.254
+	Net 18			10.4.0.0	255.255.0.0		10.4.0.1	10.4.0.2 – 10.4.255.254
+	Net 19			10.5.0.0	255.255.0.0		10.5.0.1	10.5.0.2 – 10.5.255.254(serial)
+class B:(4 network)
+        NetworkSubnet	 	IDSubnet 	Mask			Gateway IP  	Usable IP Range
+        Net 4			172.16.1.0	255.255.255.0		172.16.1.1	172.16.1.2 – 172.16.1.254
+	Net 5			172.16.2.0	255.255.255.0		172.16.2.1	172.16.2.2 – 172.16.2.254
+	Net 6			172.16.3.0	255.255.255.0		172.16.3.1	172.16.3.2 – 172.16.3.254
+	Net 7			172.16.4.0	255.255.255.0		172.16.4.1	172.16.4.2 – 172.16.4.254(serial)
+class C:(10 network)
+	NetworkSubnet	 	IDSubnet 	Mask			Gateway IP  	Usable IP Range
+	Net 8			192.168.1.0	255.255.255.240		192.168.1.1	192.168.1.2 – 192.168.1.14(serial)
+	Net 9			192.168.1.16	255.255.255.240		192.168.1.17	192.168.1.18 – 192.168.1.30(serial)
+	Net 10			192.168.1.32	255.255.255.240		192.168.1.33	192.168.1.34 – 192.168.1.46(serial)
+	Net 11			192.168.1.48	255.255.255.240		192.168.1.49	192.168.1.50 – 192.168.1.62(serial)
+	Net 12			192.168.1.64	255.255.255.240		192.168.1.65	192.168.1.66 – 192.168.1.78(serial)
+	Net 13			192.168.1.80	255.255.255.240		192.168.1.81	192.168.1.82 – 192.168.1.94(serial)
+	Net 14			192.168.1.96	255.255.255.240		192.168.1.97	192.168.1.98 – 192.168.1.110(serial)
+	Net 15			192.168.1.112	255.255.255.240		192.168.1.113	192.168.1.114 – 192.168.1.126
+	Net 16			192.168.1.128	255.255.255.240		192.168.1.129	192.168.1.130 – 192.168.1.142
+	Net 17			192.168.1.144	255.255.255.240		192.168.1.145	192.168.1.146 – 192.168.1.158(serial)
+	Net 20			192.168.1.160	255.255.255.240		192.168.1.161	192.168.1.162 – 192.168.1.174
